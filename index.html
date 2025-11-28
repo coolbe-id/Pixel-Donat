@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Pixel Donat Cianjur | Level Up Your Snack</title>
+    <meta name="description" content="Pixel Donat Toko Donat di Cianjur. Sedia Donat Box, Mini Donut, dan Pixel Drinks.">
+    <meta name="keywords" content="donat cianjur, pixel donat, donut classic, mini donut, pixel drink, kuliner cianjur, donat enak">
+    <meta name="author" content="Pixel Donat Cianjur">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pixel Donat Cianjur | Level Up Your Snack" />
+    <meta property="og:description" content="Donat retro pixel art pertama di Cianjur. Coba Donat Box, Mini Donut, dan Pixel Drinks!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pixel-donat-cianjur.com" />
+    <meta property="og:image" content="/favicon.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pixel Donat Cianjur" />
+    <meta name="twitter:description" content="Donat retro pixel art di Cianjur. Enak, unik, estetik!" />
+    <meta name="twitter:image" content="/favicon.png" />
+
+    <!-- Schema JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Bakery",
+      "name": "Pixel Donat Cianjur",
+      "image": "https://pixel-donat-cianjur.com/favicon.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cianjur",
+        "addressRegion": "Jawa Barat",
+        "addressCountry": "ID"
+      },
+      "servesCuisine": "Dessert",
+      "url": "https://pixel-donat-cianjur.com",
+      "priceRange": "$$"
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --border-thick: 4px solid black;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            /* Pola background dither */
+            background-image: 
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            overflow-x: hidden;
+            padding-bottom: 120px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-retro { font-family: 'VT323', monospace; font-size: 1.4rem; line-height: 1.2; }
+
+        /* --- UTILITIES --- */
+        .pixel-card {
+            background: white;
+            border: var(--border-thick);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+            transition: all 0.1s;
+        }
+        .pixel-card:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0px rgba(0,0,0,0.2); }
+
+        .pixel-btn {
+            border: var(--border-thick);
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px black;
+            transition: all 0.1s;
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        .pixel-btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px black; }
+        
+        /* Toggle Button Selected State */
+        .pixel-btn.selected {
+            background-color: #4ade80; /* Green */
+            color: black;
+            box-shadow: inset 4px 4px 0px rgba(0,0,0,0.2);
+            transform: translate(2px, 2px);
+        }
+
+        /* Pixel Perfect Rendering */
+        .pixel-svg {
+            shape-rendering: crispEdges;
+        }
+
+        /* --- ANIMATIONS --- */
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee-scroll {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes bounce-pixel {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .animate-bounce-pixel { animation: bounce-pixel 2s infinite; }
+        
+        @keyframes flash-text {
+            0%, 100% { opacity: 1; color: red; }
+            50% { opacity: 0.5; color: orange; }
+        }
+        .animate-flash { animation: flash-text 0.5s steps(2) infinite; }
+
+        /* Hide Scrollbar for Horizontal Scroll */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* --- BOTTOM SHEET --- */
+        .bottom-sheet {
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0;
+            background: white;
+            border-top: var(--border-thick);
+            border-left: var(--border-thick);
+            border-right: var(--border-thick);
+            border-top-left-radius: 2rem; 
+            border-top-right-radius: 2rem;
+            transform: translateY(110%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 100;
+            max-height: 90vh;
+            display: flex; 
+            flex-direction: column;
+            box-shadow: 0px -20px 60px rgba(0,0,0,0.5);
+        }
+        .bottom-sheet.open { transform: translateY(0); }
+        
+        /* Maps Grayscale */
+        .map-container iframe { 
+            filter: grayscale(80%) contrast(1.1); 
+            border: var(--border-thick); 
+        }
+
+        /* Sheet Handle */
+        .sheet-handle {
+            width: 40px;
+            height: 5px;
+            background-color: #888;
+            border-radius: 5px;
+            margin: 0 auto;
+        }
+
+        /* Additional fixes */
+        .aspect-square {
+            aspect-ratio: 1 / 1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .font-retro { font-size: 1.2rem; }
+            .text-xs { font-size: 0.65rem; }
+            .text-sm { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- 1. HEADER BERJALAN (MARQUEE) -->
+    <div class="bg-black text-white py-2 overflow-hidden border-b-4 border-gray-700 relative z-50">
+        <div class="animate-marquee-scroll px-4 text-xs font-mono">
+            >>> DELIVERY KHUSUS CIANJUR KOTA >>> PROMO: GRATIS ONGKIR MINIMAL BELANJA 200RB >>> BUKA JAM 10.00 - 20.00 >>> COBA MENU BARU: PIXEL COFFEE! >>>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="p-4 border-b-4 border-black bg-white sticky top-0 z-40 shadow-sm">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="playSfx('click'); window.scrollTo({top: 0, behavior: 'smooth'})">
+                <!-- Logo Donut Pixel -->
+                <svg width="40" height="40" viewBox="0 0 10 10" class="pixel-svg">
+                    <rect x="2" y="2" width="6" height="6" fill="#5D4037"/>
+                    <rect x="2" y="2" width="6" height="3" fill="#FF8A80"/>
+                    <rect x="3" y="3" width="1" height="1" fill="white"/>
+                    <rect x="6" y="2" width="1" height="1" fill="white"/>
+                    <rect x="4" y="4" width="2" height="2" fill="white"/>
+                </svg>
+                <div class="leading-none select-none">
+                    <h1 class="text-sm md:text-lg">PIXEL DONUT</h1>
+                    <span class="text-[10px] bg-red-500 text-white px-1">CIANJUR</span>
+                </div>
+            </div>
+            
+            <button onclick="openPayment()" class="pixel-btn bg-yellow-300 px-3 py-2 text-xs flex items-center gap-2 group hover:bg-yellow-400">
+                <span>TAS</span>
+                <div id="cart-badge" class="bg-red-500 text-white w-5 h-5 flex items-center justify-center border-2 border-black text-[10px] hidden">0</div>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl mx-auto w-full p-4 md:p-6 space-y-12">
+
+        <!-- HERO -->
+        <section class="text-center py-4 relative">
+            <h2 class="text-2xl md:text-4xl mb-4 leading-relaxed animate-bounce-pixel">LEVEL UP YOUR SNACK!</h2>
+            <p class="font-retro text-gray-600 mb-6">Donat artisan dengan tekstur renyah di luar, lembut di dalam.</p>
+            <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})" class="pixel-btn bg-black text-white px-6 py-4 text-xs hover:bg-gray-800">
+                START GAME ↓
+            </button>
+
+            <!-- PROMO BANNER 1 -->
+            <div class="mt-8 bg-yellow-300 border-4 border-black p-2 transform rotate-1 shadow-[4px_4px_0px_black] max-w-md mx-auto">
+                <div class="border-2 border-dashed border-black p-1">
+                    <p class="text-[10px] md:text-xs font-bold uppercase animate-flash">
+                        ★ UNTUK PEMBELIAN PERTAMA!! ★<br>
+                        GRATIS ONGKIR 
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU DONAT -->
+        <section id="menu">
+            <div class="flex justify-between items-end mb-4">
+                <div class="inline-block bg-black text-white px-2 py-1 text-xs">SELECT BOX SIZE</div>
+                <!-- PROMO BANNER 2 -->
+                <div class="hidden md:block bg-red-500 text-white text-[10px] px-2 py-1 border-2 border-black animate-pulse">
+                    BONUS STICKER TIAP PEMBELIAN
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Mini -->
+                <div onclick="startBuilder('mini')" class="pixel-card p-6 flex flex-col items-center cursor-pointer hover:bg-blue-50 group">
+                    <div id="visual-mini" class="mb-4 transform group-hover:scale-110 transition-transform h-24 flex items-center">
+                        <!-- Icon Injected by JS -->
+                    </div>
+                    <h3 class="text-sm font-bold">MINI BOX</h3>
+                    <p class="font-retro text-gray-500">6 Pcs Donut</p>
+                    <div class="mt-auto text-red-600 font-bold bg-yellow-100 px-2 border-2 border-black">Rp 65.000</div>
+                </div>
+                <!-- Medium -->
+                <div onclick="startBuilder('medium')" class="pixel-card p-6 flex flex-col items-center cursor-pointer hover:bg-blue-50 group relative">
+                    <div class="absolute -top-3 -right-3 bg-red-500 text-white text-[10px] px-2 py-1 border-2 border-black animate-pulse">BEST!</div>
+                    <div id="visual-medium" class="mb-4 transform group-hover:scale-110 transition-transform h-24 flex items-center">
+                         <!-- Icon Injected by JS -->
+                    </div>
+                    <h3 class="text-sm font-bold">MEDIUM BOX</h3>
+                    <p class="font-retro text-gray-500">12 Pcs Donut</p>
+                    <div class="mt-auto text-red-600 font-bold bg-yellow-100 px-2 border-2 border-black">Rp 120.000</div>
+                </div>
+                <!-- Big -->
+                <div onclick="startBuilder('big')" class="pixel-card p-6 flex flex-col items-center cursor-pointer hover:bg-blue-50 group">
+                    <div id="visual-big" class="mb-4 transform group-hover:scale-110 transition-transform h-24 flex items-center">
+                         <!-- Icon Injected by JS -->
+                    </div>
+                    <h3 class="text-sm font-bold">BIG BOX</h3>
+                    <p class="font-retro text-gray-500">18 Pcs Donut</p>
+                    <div class="mt-auto text-red-600 font-bold bg-yellow-100 px-2 border-2 border-black">Rp 175.000</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. HORIZONTAL SCROLL DRINKS MENU -->
+        <section>
+            <div class="flex justify-between items-center mb-4">
+                <div class="bg-blue-600 text-white px-2 py-1 text-xs inline-block">MANA POTIONS (DRINKS)</div>
+                <span class="text-[10px] text-gray-500 animate-pulse">◄ GESER KIRI-KANAN ►</span>
+            </div>
+            
+            <div class="flex overflow-x-auto gap-4 pb-6 hide-scroll snap-x snap-mandatory px-1">
+                <!-- Drink 1 -->
+                <div class="pixel-card min-w-[160px] p-4 flex flex-col items-center snap-center bg-blue-50">
+                    <!-- Pixel Cup SVG -->
+                    <svg width="50" height="50" viewBox="0 0 10 10" class="mb-2 pixel-svg">
+                        <rect x="3" y="2" width="4" height="6" fill="#795548"/>
+                        <rect x="2" y="2" width="1" height="6" fill="#fff" opacity="0.5"/> <!-- Glass Reflection -->
+                        <rect x="3" y="1" width="4" height="1" fill="#eee"/> <!-- Foam -->
+                        <rect x="5" y="0" width="1" height="2" fill="black"/> <!-- Straw -->
+                    </svg>
+                    <h4 class="text-xs font-bold mb-1">Ice Kopi 8-Bit</h4>
+                    <p class="text-[10px] text-gray-500 mb-2">Gula Aren</p>
+                    <button onclick="addDrink('kopi')" class="pixel-btn bg-white text-[10px] px-2 py-1 w-full hover:bg-blue-200">
+                        + Rp 15.000
+                    </button>
+                </div>
+
+                <!-- Drink 2 -->
+                <div class="pixel-card min-w-[160px] p-4 flex flex-col items-center snap-center bg-pink-50">
+                    <svg width="50" height="50" viewBox="0 0 10 10" class="mb-2 pixel-svg">
+                        <rect x="3" y="2" width="4" height="6" fill="#F48FB1"/>
+                        <rect x="3" y="1" width="4" height="1" fill="#fff"/>
+                        <rect x="4" y="3" width="1" height="1" fill="#C2185B"/> <!-- Berry -->
+                        <rect x="6" y="0" width="1" height="3" fill="#C2185B"/> <!-- Straw -->
+                    </svg>
+                    <h4 class="text-xs font-bold mb-1">Berry Shake</h4>
+                    <p class="text-[10px] text-gray-500 mb-2">Strawberry</p>
+                    <button onclick="addDrink('berry')" class="pixel-btn bg-white text-[10px] px-2 py-1 w-full hover:bg-pink-200">
+                        + Rp 18.000
+                    </button>
+                </div>
+
+                <!-- Drink 3 -->
+                <div class="pixel-card min-w-[160px] p-4 flex flex-col items-center snap-center bg-green-50">
+                    <svg width="50" height="50" viewBox="0 0 10 10" class="mb-2 pixel-svg">
+                        <rect x="3" y="2" width="4" height="6" fill="#A5D6A7"/>
+                        <rect x="3" y="1" width="4" height="1" fill="#fff"/>
+                        <rect x="5" y="0" width="1" height="2" fill="black"/>
+                    </svg>
+                    <h4 class="text-xs font-bold mb-1">Matcha Latte</h4>
+                    <p class="text-[10px] text-gray-500 mb-2">Pure Matcha</p>
+                    <button onclick="addDrink('matcha')" class="pixel-btn bg-white text-[10px] px-2 py-1 w-full hover:bg-green-200">
+                        + Rp 18.000
+                    </button>
+                </div>
+                
+                 <!-- Drink 4 -->
+                 <div class="pixel-card min-w-[160px] p-4 flex flex-col items-center snap-center bg-yellow-50">
+                    <svg width="50" height="50" viewBox="0 0 10 10" class="mb-2 pixel-svg">
+                        <rect x="3" y="2" width="4" height="6" fill="#FFF59D"/>
+                        <rect x="4" y="4" width="2" height="2" fill="#FBC02D"/> <!-- Lemon slice -->
+                        <rect x="5" y="0" width="1" height="2" fill="black"/>
+                    </svg>
+                    <h4 class="text-xs font-bold mb-1">Lemon Tea</h4>
+                    <p class="text-[10px] text-gray-500 mb-2">Segar!</p>
+                    <button onclick="addDrink('lemon')" class="pixel-btn bg-white text-[10px] px-2 py-1 w-full hover:bg-yellow-200">
+                        + Rp 12.000
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MINI DONUT POUCH (UPDATED ICON) -->
+        <section class="border-t-4 border-black pt-8 relative">
+            <!-- Promo Badge Overlay -->
+             <div class="absolute top-4 right-0 bg-black text-white px-2 py-1 text-[10px] transform rotate-3 z-10 border-2 border-white">
+                ITEM LANGKA!
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-100 to-pink-100 border-4 border-black p-4 flex flex-col md:flex-row gap-6 items-center shadow-[8px_8px_0px_black]">
+                <div id="pouch-visual" class="w-32 h-32 flex-shrink-0 bg-white border-2 border-black flex items-center justify-center relative overflow-hidden">
+                    <!-- NEW SVG ICON HERE -->
+                </div>
+                <div class="flex-grow text-center md:text-left">
+                    <h3 class="text-sm md:text-lg mb-2 font-bold">POUCH MINI DONUT</h3>
+                    <p class="font-retro text-gray-800 mb-2">20 butir donat mini mix rasa (Random).</p>
+                    <div class="text-red-600 font-bold text-lg">Rp 45.000</div>
+                </div>
+                <button onclick="addMiniDonutsToCart()" class="pixel-btn bg-white px-6 py-4 hover:bg-gray-50 text-xs font-bold">
+                    + ADD
+                </button>
+            </div>
+        </section>
+
+        <!-- GALLERY (NEW) -->
+        <section>
+            <h3 class="text-center bg-gray-200 px-4 py-1 text-xs inline-block mx-auto block w-fit border-2 border-black mb-4">MENU DONAT</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="pixel-card p-1">
+                    <img src="https://i.ibb.co.com/bMCqHBpR/IMG-20251128-WA0001.jpg" alt="Snow Matcha" class="w-full h-auto border-2 border-black grayscale hover:grayscale-0 transition-all">
+                </div>
+                <div class="pixel-card p-1">
+                    <img src="https://i.ibb.co.com/HD6BNJRG/IMG-20251128-WA0002.jpg" alt="Snow Cheese" class="w-full h-auto border-2 border-black grayscale hover:grayscale-0 transition-all">
+                </div>
+                <div class="pixel-card p-1">
+                    <img src="https://i.ibb.co.com/fzPRYTN0/IMG-20251128-WA0003.jpg" alt="Black Oreo" class="w-full h-auto border-2 border-black grayscale hover:grayscale-0 transition-all">
+                </div>
+                 <div class="pixel-card p-1">
+                    <img src="https://i.ibb.co.com/fzPRYTN0/IMG-20251128-WA0003.jpg" alt="Original" class="w-full h-auto border-2 border-black grayscale hover:grayscale-0 transition-all">
+                </div>
+                <div class="pixel-card p-1">
+                    <img src="https://i.ibb.co.com/Kx6CxGwD/IMG-20251128-WA0004.jpg" alt="Meses" class="w-full h-auto border-2 border-black grayscale hover:grayscale-0 transition-all">
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. TESTIMONI (RPG STYLE) -->
+        <section class="space-y-6">
+            <h3 class="text-center bg-black text-white px-2 py-1 text-xs inline-block mx-auto block w-fit">PLAYER REVIEWS</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Review 1 -->
+                <div class="pixel-card p-4 flex gap-4 bg-gray-50">
+                    <div class="w-12 h-12 bg-blue-200 border-2 border-black flex-shrink-0 overflow-hidden">
+                        <svg viewBox="0 0 10 10" class="pixel-svg"><rect x="3" y="3" width="4" height="4" fill="black"/><rect x="3" y="2" width="4" height="1" fill="black"/><rect x="2" y="3" width="1" height="5" fill="black"/></svg>
+                    </div>
+                    <div class="relative">
+                        <!-- Chat Bubble Triangle -->
+                        <div class="absolute -left-3 top-2 w-0 h-0 border-t-[6px] border-t-transparent border-r-[8px] border-r-black border-b-[6px] border-b-transparent"></div>
+                        <h4 class="text-xs font-bold mb-1">User_Cianjur01</h4>
+                        <p class="font-retro text-sm text-gray-600">"Box donatnya unik banget! Rasa Matcha-nya pas, gak terlalu manis."</p>
+                        <div class="text-yellow-500 text-xs mt-1">★★★★★</div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div class="pixel-card p-4 flex gap-4 bg-gray-50">
+                    <div class="w-12 h-12 bg-pink-200 border-2 border-black flex-shrink-0 overflow-hidden">
+                        <svg viewBox="0 0 10 10" class="pixel-svg"><rect x="2" y="3" width="6" height="4" fill="#880E4F"/><rect x="3" y="4" width="1" height="1" fill="white"/><rect x="6" y="4" width="1" height="1" fill="white"/></svg>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-3 top-2 w-0 h-0 border-t-[6px] border-t-transparent border-r-[8px] border-r-black border-b-[6px] border-b-transparent"></div>
+                        <h4 class="text-xs font-bold mb-1">Siti_Gamer</h4>
+                        <p class="font-retro text-sm text-gray-600">"Minumannya seger. Pengiriman ke Joglo cepet banget."</p>
+                        <div class="text-yellow-500 text-xs mt-1">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAPS -->
+        <section>
+            <h3 class="text-center mb-6 text-sm bg-gray-200 inline-block px-4 py-1 border-2 border-black mx-auto block w-fit">BASE CAMP (LOKASI)</h3>
+            <div class="map-container w-full h-56 bg-gray-300 relative">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.565868285746!2d107.13599831477218!3d-6.822557995071158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6852579057b985%3A0x629555c824c96a32!2sAlun-Alun%20Cianjur!5e0!3m2!1sen!2sid!4v1625637284728!5m2!1sen!2sid" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="space-y-4">
+            <h3 class="text-lg text-center underline decoration-4 decoration-black">FAQ</h3>
+            <div id="faq-container" class="space-y-2"></div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-12 px-4 border-t-8 border-gray-600 mt-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-xl font-bold mb-2 text-yellow-300">PIXEL DONUT</h2>
+            <p class="text-xs text-gray-400 font-retro mb-4">Cianjur, Jawa Barat.</p>
+            <div class="flex justify-center gap-4 text-xs">
+                <a href="#" class="hover:text-green-400">WHATSAPP</a>
+                <a href="#" class="hover:text-pink-400">INSTAGRAM</a>
+                <a href="#" class="hover:text-blue-400">FACEBOOK</a>
+            </div>
+            <p class="mt-8 text-[10px] text-gray-600">© 2025 Pixel Donut. Insert Coin to Continue.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL: BUILDER -->
+    <div id="builder-modal" class="fixed inset-0 bg-white z-50 hidden flex-col">
+        <div class="p-4 border-b-4 border-black flex justify-between items-center bg-gray-50">
+            <div>
+                <h3 class="text-[10px] text-gray-500 uppercase tracking-wider">CRAFTING TABLE</h3>
+                <div id="builder-title" class="text-sm font-bold">LOADING...</div>
+            </div>
+            <button onclick="playSfx('click'); closeBuilder()" class="w-8 h-8 flex items-center justify-center bg-red-100 border-2 border-black hover:bg-red-500 hover:text-white font-bold">X</button>
+        </div>
+        <div class="bg-gray-100 p-4 border-b-4 border-black overflow-x-auto shadow-inner">
+            <div id="box-slots" class="grid gap-2 mx-auto transition-all" style="max-width: 400px;"></div>
+        </div>
+        <div class="flex-grow overflow-y-auto p-4 bg-white pb-32">
+            <div class="text-center text-[10px] mb-4 text-gray-400 uppercase">TAP FLAVOR TO FILL</div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4" id="flavor-grid"></div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-white border-t-4 border-black shadow-[0_-10px_20px_rgba(0,0,0,0.1)]">
+            <button id="add-box-btn" onclick="finishBuilder()" class="pixel-btn w-full py-4 font-bold text-xs" disabled>BOX NOT FULL</button>
+        </div>
+    </div>
+
+    <!-- 4. MODAL: PAYMENT SHEET (UPDATED DELIVERY TOGGLE) -->
+    <div id="payment-sheet" class="bottom-sheet">
+        <div class="w-full py-3" id="sheet-drag-area">
+            <div class="sheet-handle"></div>
+        </div>
+        
+        <div class="p-6 pt-0 flex flex-col h-full">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold">INVENTORY (TAS)</h2>
+                <button onclick="playSfx('click'); closePayment()" class="text-xs underline text-gray-500">TUTUP</button>
+            </div>
+
+            <div id="cart-list" class="flex-grow overflow-y-auto space-y-4 pr-2 pb-4 hide-scroll"></div>
+
+            <div class="mt-auto border-t-4 border-black pt-4 bg-gray-50 -mx-6 px-6 pb-6">
+                
+                <!-- DELIVERY TOGGLE -->
+                <div class="flex gap-2 mb-4 bg-white p-2 border-2 border-dashed border-gray-400">
+                    <button onclick="setDeliveryMode(true)" id="btn-delivery" class="pixel-btn flex-1 py-2 text-[10px] selected">
+                        DIANTAR (+10K)
+                    </button>
+                    <button onclick="setDeliveryMode(false)" id="btn-pickup" class="pixel-btn flex-1 py-2 text-[10px]">
+                        AMBIL SENDIRI (FREE)
+                    </button>
+                </div>
+
+                <div class="space-y-2 mb-4 text-sm font-retro text-gray-600">
+                    <div class="flex justify-between"><span>Subtotal</span><span id="sub-total">Rp 0</span></div>
+                    <div class="flex justify-between">
+                        <span id="delivery-label">Delivery Fee</span>
+                        <span id="delivery-fee">Rp 10.000</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-end mb-4 border-t-2 border-dashed border-gray-400 pt-2">
+                    <span class="text-sm font-bold">TOTAL</span>
+                    <span id="grand-total" class="text-2xl text-red-600 font-bold">Rp 0</span>
+                </div>
+                <button onclick="processWhatsApp()" class="pixel-btn bg-green-500 text-white w-full py-4 text-sm font-bold hover:bg-green-600 flex justify-center items-center gap-2 border-black">
+                    <span>KONFIRMASI WA</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 border-2 border-white text-xs z-[110] opacity-0 transition-opacity pointer-events-none shadow-xl flex items-center gap-2">
+        <span class="text-green-400">✓</span> <span id="toast-msg">Saved!</span>
+    </div>
+
+    <script>
+        // --- AUDIO ENGINE ---
+        let audioContextInitialized = false;
+        
+        function initAudioContext() {
+            if (audioContextInitialized) return;
+            
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const audioCtx = new AudioContext();
+                audioContextInitialized = true;
+                return audioCtx;
+            } catch (e) {
+                console.error("Web Audio API not supported:", e);
+                return null;
+            }
+        }
+        
+        function playSfx(type) {
+            const audioCtx = initAudioContext();
+            if (!audioCtx) return;
+            
+            // Resume audio context if suspended (required by some browsers)
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'square'; 
+                osc.frequency.setValueAtTime(400, now); 
+                osc.frequency.exponentialRampToValueAtTime(100, now + 0.1);
+                gain.gain.setValueAtTime(0.1, now); 
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                osc.start(now); 
+                osc.stop(now + 0.1);
+            } else if (type === 'pop') {
+                osc.type = 'sine'; 
+                osc.frequency.setValueAtTime(600, now);
+                gain.gain.setValueAtTime(0.1, now); 
+                gain.gain.linearRampToValueAtTime(0, now+0.1);
+                osc.start(now); 
+                osc.stop(now+0.1);
+            }
+        }
+
+        // --- DATA & CONFIG ---
+        const CONFIG = { wa: "6281234567890", deliveryFee: 10000 };
+        
+        const BOXES = {
+            'mini': { name: "MINI BOX", size: 6, price: 65000 },
+            'medium': { name: "MEDIUM BOX", size: 12, price: 120000 },
+            'big': { name: "BIG BOX", size: 18, price: 175000 }
+        };
+
+        const FLAVORS = [
+            { id: 'classic', name: 'Original', color: '#F8C8A0', accent: '#fff' },
+            { id: 'choco', name: 'Meses', color: '#5D4037', accent: '#FFD54F' },
+            { id: 'matcha', name: 'Snow Matcha', color: '#A5D6A7', accent: '#2E7D32' },
+            { id: 'lemon', name: 'Snow Cheese', color: '#FFF59D', accent: '#FBC02D' },
+            { id: 'oreo', name: 'Black Oreo', color: '#B0BEC5', accent: '#37474F' },
+        ];
+
+        const DRINKS = {
+            'kopi': { name: "Ice Kopi 8-Bit", price: 15000 },
+            'berry': { name: "Berry Shake", price: 18000 },
+            'matcha': { name: "Matcha Latte", price: 18000 },
+            'lemon': { name: "Lemon Tea", price: 12000 },
+        };
+
+        // --- STATE ---
+        let cart = [];
+        let currentBuilder = { type: null, filled: [] };
+        let isDelivery = true; // Default Delivery
+
+        // Load cart from localStorage if available
+        function loadCart() {
+            try {
+                const savedCart = localStorage.getItem('pixelCart');
+                if (savedCart) {
+                    cart = JSON.parse(savedCart);
+                }
+            } catch (e) {
+                console.error("Error loading cart from localStorage:", e);
+                cart = [];
+            }
+        }
+        
+        // --- SANITIZATION ---
+        // This function cleans up old or invalid data from the cart
+        function sanitizeCart() {
+            const validFlavorIds = FLAVORS.map(f => f.id);
+            let cartChanged = false;
+
+            cart = cart.filter(item => {
+                if (item.type === 'custom_box' && item.contents) {
+                    const originalLength = item.contents.length;
+                    // Filter out any invalid flavor IDs from the contents
+                    item.contents = item.contents.filter(id => validFlavorIds.includes(id));
+                    if (item.contents.length !== originalLength) {
+                        cartChanged = true;
+                    }
+                    // If the box is now empty, remove the item from the cart entirely
+                    if (item.contents.length === 0) {
+                        cartChanged = true;
+                        return false; // This removes the item
+                    }
+                }
+                return true; // Keep the item
+            });
+
+            if (cartChanged) {
+                saveCart(); // Save the sanitized cart back to localStorage
+                showToast("Keranjang diperbarui karena ada data yang tidak valid.");
+            }
+        }
+
+        // --- HELPER SVG ---
+        function generateDonutSVG(color, accent, size=60) {
+            return `<svg width="${size}" height="${size}" viewBox="0 0 10 10" class="pixel-svg drop-shadow-md mx-auto"><rect x="2" y="2" width="6" height="6" fill="#D7CCC8"/><rect x="2" y="2" width="6" height="3" fill="${color}"/><rect x="1" y="3" width="1" height="4" fill="${color}"/><rect x="8" y="3" width="1" height="4" fill="${color}"/><rect x="3" y="3" width="1" height="1" fill="${accent}"/><rect x="6" y="2" width="1" height="1" fill="${accent}"/><rect x="4" y="4" width="2" height="2" fill="#fff"/></svg>`;
+        }
+        
+        // --- NEW ICONS (PIXEL SVG) ---
+        const BOX_ICONS = {
+            mini: `
+            <svg width="100" height="100" viewBox="0 0 24 24" class="pixel-svg mx-auto drop-shadow-lg">
+                <!-- Shadow -->
+                <rect x="5" y="19" width="14" height="2" fill="#000000" opacity="0.2"/>
+                <!-- Box Body -->
+                <path d="M4 10 h16 v10 h-16 z" fill="#FFAB91" stroke="black" stroke-width="0.5"/>
+                <path d="M4 10 h16 v2 h-16 z" fill="#FF8A65"/> 
+                <!-- Lid -->
+                <path d="M2 8 h20 v4 h-20 z" fill="#FF7043" stroke="black" stroke-width="0.5"/>
+                <!-- Ribbon/Detail -->
+                <rect x="11" y="8" width="2" height="12" fill="#BF360C"/>
+                <rect x="10" y="8" width="4" height="1" fill="#FF5722"/>
+            </svg>`,
+            
+            medium: `
+            <svg width="120" height="100" viewBox="0 0 32 24" class="pixel-svg mx-auto drop-shadow-lg">
+                <rect x="3" y="20" width="26" height="2" fill="#000000" opacity="0.2"/>
+                <!-- Box Body -->
+                <path d="M2 10 h28 v11 h-28 z" fill="#FFE082" stroke="black" stroke-width="0.5"/>
+                <path d="M2 10 h28 v2 h-28 z" fill="#FFD54F"/>
+                <!-- Lid -->
+                <path d="M0 7 h32 v5 h-32 z" fill="#FFC107" stroke="black" stroke-width="0.5"/>
+                <!-- Logo area -->
+                <rect x="12" y="14" width="8" height="4" fill="#FFFFFF" stroke="black" stroke-width="0.5"/>
+                <rect x="13" y="15" width="2" height="2" fill="#D81B60"/>
+            </svg>`,
+
+            big: `
+            <svg width="100" height="100" viewBox="0 0 24 24" class="pixel-svg mx-auto drop-shadow-lg">
+                 <rect x="5" y="21" width="14" height="2" fill="#000000" opacity="0.2"/>
+                 <!-- Bottom Box -->
+                 <path d="M4 14 h16 v8 h-16 z" fill="#8D6E63" stroke="black" stroke-width="0.5"/>
+                 <rect x="4" y="14" width="16" height="2" fill="#6D4C41"/>
+                 
+                 <!-- Top Box -->
+                 <path d="M5 5 h14 v9 h-14 z" fill="#D7CCC8" stroke="black" stroke-width="0.5"/>
+                 <path d="M3 4 h18 v3 h-18 z" fill="#A1887F" stroke="black" stroke-width="0.5"/>
+                 
+                 <!-- Tape -->
+                 <rect x="11" y="4" width="2" height="18" fill="#EF5350" stroke="black" stroke-width="0.5"/>
+            </svg>`,
+
+            pouch: `
+            <svg width="100" height="100" viewBox="0 0 24 24" class="pixel-svg mx-auto drop-shadow-md">
+                <!-- Shadow -->
+                <rect x="6" y="21" width="12" height="2" fill="#000000" opacity="0.2"/>
+                
+                <!-- Pouch Body -->
+                <path d="M5 8 h14 v14 h-14 z" fill="#8D6E63" stroke="black" stroke-width="0.5"/>
+                <rect x="5" y="8" width="14" height="2" fill="#6D4C41"/>
+                
+                <!-- Pouch Top Crumple -->
+                <path d="M6 4 h12 v4 h-12 z" fill="#A1887F" stroke="black" stroke-width="0.5"/>
+                <!-- Tie/String -->
+                <rect x="5" y="7" width="14" height="1" fill="#FFCCBC"/>
+                
+                <!-- Donuts Peeking Out -->
+                <rect x="8" y="3" width="3" height="3" fill="#F48FB1" stroke="black" stroke-width="0.5"/> <!-- Pink -->
+                <rect x="13" y="2" width="3" height="3" fill="#A5D6A7" stroke="black" stroke-width="0.5"/> <!-- Green -->
+                
+                <!-- Label -->
+                <rect x="9" y="14" width="6" height="4" fill="#FFF8E1" stroke="black" stroke-width="0.5"/>
+                <rect x="10" y="15" width="4" height="1" fill="#FF5722"/>
+            </svg>
+            `
+        };
+
+        // --- CORE FUNCTIONS ---
+        function saveCart() { 
+            try {
+                localStorage.setItem('pixelCart', JSON.stringify(cart));
+            } catch (e) {
+                console.error("Error saving cart to localStorage:", e);
+            }
+            updateCartBadge(); 
+        }
+        
+        function updateCartBadge() { 
+            const el = document.getElementById('cart-badge'); 
+            el.innerText = cart.length; 
+            el.style.display = cart.length > 0 ? 'flex' : 'none'; 
+        }
+        
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            t.style.opacity = '1'; 
+            setTimeout(() => t.style.opacity = '0', 3000);
+        }
+
+        // --- CART LOGIC ---
+        function addDrink(id) {
+            playSfx('pop');
+            cart.push({ type: 'drink', name: DRINKS[id].name, price: DRINKS[id].price });
+            saveCart();
+            showToast(`${DRINKS[id].name} Got!`);
+        }
+
+        function addMiniDonutsToCart() {
+            playSfx('pop');
+            cart.push({ type: 'mini_pack', name: "Pouch Mini Donut", price: 45000 });
+            saveCart();
+            showToast("Pouch Got!");
+        }
+
+        function setDeliveryMode(mode) {
+            playSfx('click');
+            isDelivery = mode;
+            // Update button styles
+            const btnDel = document.getElementById('btn-delivery');
+            const btnPick = document.getElementById('btn-pickup');
+            
+            if(isDelivery) {
+                btnDel.classList.add('selected'); 
+                btnPick.classList.remove('selected');
+            } else {
+                btnDel.classList.remove('selected'); 
+                btnPick.classList.add('selected');
+            }
+            renderCart(); // Re-calculate totals
+        }
+
+        function renderCart() {
+            const list = document.getElementById('cart-list');
+            const subEl = document.getElementById('sub-total');
+            const delLabel = document.getElementById('delivery-label');
+            const delFeeEl = document.getElementById('delivery-fee');
+            const grandEl = document.getElementById('grand-total');
+
+            if(cart.length === 0) {
+                list.innerHTML = `<div class="text-center py-10 text-gray-400 font-retro border-2 border-dashed border-gray-300">TAS KOSONG...</div>`;
+                subEl.innerText = 'Rp 0'; 
+                delFeeEl.innerText = 'Rp 0'; 
+                grandEl.innerText = 'Rp 0';
+                return;
+            }
+
+            let subTotal = 0;
+            list.innerHTML = cart.map((item, idx) => {
+                subTotal += item.price;
+                let detail = '';
+                if(item.type === 'custom_box') {
+                     const c = {}; 
+                     item.contents.forEach(x => c[x]=(c[x]||0)+1);
+                     detail = `<div class="flex flex-wrap gap-1 mt-1">` + 
+                              Object.entries(c).map(([k,v]) => {
+                                  const flavor = FLAVORS.find(f=>f.id===k);
+                                  const flavorName = flavor ? flavor.name : 'Rasa Tidak Diketahui';
+                                  return `<span class="text-[10px] bg-gray-100 px-1 border border-gray-300">${v}x ${flavorName}</span>`;
+                              }).join('') + 
+                              `</div>`;
+                } else if (item.type === 'drink') {
+                    detail = `<div class="text-[10px] text-blue-500 italic mt-1">Minuman Dingin</div>`;
+                } else {
+                    detail = `<div class="text-[10px] text-gray-500 italic mt-1">20 Pcs Mix</div>`;
+                }
+
+                return `
+                <div class="border-b-2 border-dashed border-gray-300 pb-2">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-bold text-sm">${item.name || 'Item Tanpa Nama'}</div>
+                            <div class="text-xs text-red-500 font-bold">Rp ${item.price.toLocaleString('id-ID')}</div>
+                        </div>
+                        <button onclick="removeCartItem(${idx})" class="text-gray-400 hover:text-red-500 font-bold px-2">x</button>
+                    </div>
+                    ${detail}
+                </div>`;
+            }).join('');
+
+            const finalDelivery = isDelivery ? CONFIG.deliveryFee : 0;
+            
+            delLabel.innerText = isDelivery ? "Ongkir (Cianjur)" : "Ambil Sendiri";
+            delFeeEl.innerText = isDelivery ? `Rp ${CONFIG.deliveryFee.toLocaleString('id-ID')}` : "Gratis";
+            
+            subEl.innerText = `Rp ${subTotal.toLocaleString('id-ID')}`;
+            grandEl.innerText = `Rp ${(subTotal + finalDelivery).toLocaleString('id-ID')}`;
+        }
+
+        function removeCartItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCart();
+        }
+
+        // --- BUILDER LOGIC ---
+        function startBuilder(type) {
+            playSfx('click');
+            currentBuilder = { type: type, filled: [] };
+            renderBuilderUI();
+            document.getElementById('builder-modal').classList.remove('hidden');
+            document.getElementById('builder-modal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBuilder() {
+            document.getElementById('builder-modal').classList.add('hidden');
+            document.getElementById('builder-modal').classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function renderBuilderUI() {
+            const box = BOXES[currentBuilder.type];
+            document.getElementById('builder-title').innerText = `${box.name} (${currentBuilder.filled.length}/${box.size})`;
+            
+            const slotContainer = document.getElementById('box-slots');
+            const cols = box.size === 12 ? 4 : (box.size === 18 ? 6 : 3);
+            slotContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            
+            slotContainer.innerHTML = '';
+            for(let i=0; i<box.size; i++) {
+                const fid = currentBuilder.filled[i];
+                const div = document.createElement('div');
+                div.className = `w-full aspect-square border-2 ${fid ? 'border-black bg-white' : 'border-dashed border-gray-400 bg-gray-100'} flex items-center justify-center cursor-pointer`;
+                
+                if (fid) {
+                    const flavor = FLAVORS.find(f=>f.id===fid);
+                    if(flavor) {
+                        div.innerHTML = generateDonutSVG(flavor.color, flavor.accent, 40);
+                    } else {
+                        // Handle case where flavor is not found, maybe remove it from the builder
+                        div.innerHTML = '<span class="text-red-500 text-xs">Error</span>';
+                    }
+                    div.onclick = () => { 
+                        currentBuilder.filled.splice(i,1); 
+                        renderBuilderUI(); 
+                    };
+                } else {
+                    div.innerHTML = '<span class="text-gray-300 text-xs">+</span>';
+                }
+                slotContainer.appendChild(div);
+            }
+
+            const flavorGrid = document.getElementById('flavor-grid');
+            flavorGrid.innerHTML = FLAVORS.map(f => 
+                `<div onclick="if(currentBuilder.filled.length < BOXES[currentBuilder.type].size){ playSfx('pop'); currentBuilder.filled.push('${f.id}'); renderBuilderUI(); }" 
+                     class="border-2 border-black p-2 flex flex-col items-center cursor-pointer bg-white active:scale-95">
+                    ${generateDonutSVG(f.color, f.accent, 40)}
+                    <span class="text-[10px] mt-1 font-bold">${f.name}</span>
+                </div>`
+            ).join('');
+
+            const btn = document.getElementById('add-box-btn');
+            if(currentBuilder.filled.length === box.size) {
+                btn.disabled = false; 
+                btn.innerText = "SIMPAN KE TAS"; 
+                btn.className = "pixel-btn bg-green-400 text-black w-full py-4 font-bold border-4 border-black";
+            } else {
+                btn.disabled = true; 
+                btn.innerText = `ISI LAGI (${box.size - currentBuilder.filled.length})`; 
+                btn.className = "pixel-btn bg-gray-200 text-gray-400 w-full py-4 border-4 border-gray-400";
+            }
+        }
+
+        function finishBuilder() {
+            playSfx('pop');
+            cart.push({ 
+                type: 'custom_box', 
+                name: BOXES[currentBuilder.type].name, 
+                price: BOXES[currentBuilder.type].price, 
+                contents: [...currentBuilder.filled] 
+            });
+            saveCart(); 
+            closeBuilder(); 
+            showToast("Box Created!");
+            setTimeout(openPayment, 400);
+        }
+
+        // --- PAYMENT SHEET LOGIC ---
+        function openPayment() { 
+            playSfx('click'); 
+            renderCart(); 
+            document.getElementById('payment-sheet').classList.add('open'); 
+            document.body.style.overflow = 'hidden'; 
+        }
+        
+        function closePayment() { 
+            document.getElementById('payment-sheet').classList.remove('open'); 
+            document.body.style.overflow = ''; 
+        }
+
+        function processWhatsApp() {
+            if(cart.length === 0) {
+                showToast("Belanja dulu dong!");
+                return;
+            }
+            
+            let msg = "*ORDER PIXEL DONUT CIANJUR*\n--------------------------\n";
+            let sub = 0;
+            
+            cart.forEach((item, i) => {
+                sub += item.price;
+                msg += `${i+1}. ${item.name || 'Item Tanpa Nama'} - ${item.price/1000}k\n`;
+                if(item.type === 'custom_box') {
+                    const c = {}; 
+                    item.contents.forEach(x => c[x]=(c[x]||0)+1);
+                    msg += `   [${Object.entries(c).map(([k,v]) => {
+                        const flavor = FLAVORS.find(f => f.id === k);
+                        const flavorName = flavor ? flavor.name : 'Rasa Tidak Diketahui';
+                        return `${v}x ${flavorName}`;
+                    }).join(', ')}]\n`;
+                }
+            });
+
+            const deliveryCost = isDelivery ? CONFIG.deliveryFee : 0;
+            const deliveryText = isDelivery ? "Diantar (Delivery)" : "Ambil Sendiri (Pick-Up)";
+
+            msg += `\nMetode: ${deliveryText}`;
+            msg += `\nSubtotal: Rp ${sub.toLocaleString('id-ID')}`;
+            if(isDelivery) msg += `\nOngkir: Rp ${CONFIG.deliveryFee.toLocaleString('id-ID')}`;
+            msg += `\n*TOTAL: Rp ${(sub+deliveryCost).toLocaleString('id-ID')}*`;
+            
+            if(isDelivery) {
+                msg += `\n--------------------------\nNama:\nAlamat Lengkap:\nShare Loc:\n`;
+            } else {
+                msg += `\n--------------------------\nNama:\nJam Pengambilan:\n`;
+            }
+
+            try {
+                window.open(`https://wa.me/${CONFIG.wa}?text=${encodeURIComponent(msg)}`, '_blank');
+            } catch (e) {
+                console.error("Error opening WhatsApp:", e);
+                showToast("Error opening WhatsApp. Please try again.");
+            }
+        }
+
+        // --- INIT ---
+        window.onload = () => {
+            loadCart();
+            sanitizeCart(); // Sanitize cart after loading
+            updateCartBadge();
+            
+            // INJECT SVG ICONS
+            document.getElementById('visual-mini').innerHTML = BOX_ICONS.mini;
+            document.getElementById('visual-medium').innerHTML = BOX_ICONS.medium;
+            document.getElementById('visual-big').innerHTML = BOX_ICONS.big;
+            document.getElementById('pouch-visual').innerHTML = BOX_ICONS.pouch;
+
+            // FAQ
+            const faqs = [
+                {q: "Lokasi dimana?", a: "Jl. Siti Jenab, Cianjur (Dekat Alun-alun)."},
+                {q: "Apa bisa COD?", a: "Bisa, khusus area Cianjur Kota."},
+                {q: "Minumannya aman dikirim?", a: "Aman! Kita pakai cup seal anti tumpah."}
+            ];
+            
+            const faqContainer = document.getElementById('faq-container');
+            faqContainer.innerHTML = faqs.map(f => `
+                <details class="group border-2 border-black bg-white">
+                    <summary class="p-3 cursor-pointer font-bold list-none flex justify-between bg-gray-50">
+                        ${f.q} 
+                        <span class="transform transition-transform group-open:rotate-180">▼</span>
+                    </summary>
+                    <div class="p-3 border-t-2 border-black text-sm font-mono text-gray-600">${f.a}</div>
+                </details>`
+            ).join('');
+
+            // Add touch event listeners for mobile
+            if ('ontouchstart' in window) {
+                document.addEventListener('touchstart', function() {}, {passive: true});
+            }
+        };
+
+        // Handle browser back button
+        window.addEventListener('popstate', function(event) {
+            if (document.getElementById('builder-modal').classList.contains('flex')) {
+                closeBuilder();
+            } else if (document.getElementById('payment-sheet').classList.contains('open')) {
+                closePayment();
+            }
+        });
+    </script>
+</body>
+</html>
